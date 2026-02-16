@@ -1,308 +1,272 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site en Construction</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site en Construction</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            overflow-x: hidden;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .container {
-            text-align: center;
-            padding: 20px;
-            max-width: 800px;
-        }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
 
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: fadeInDown 1s ease-out;
-        }
+.container {
+    text-align: center;
+    padding: 20px;
+    max-width: 800px;
+}
 
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-            animation: fadeIn 1.5s ease-out;
-        }
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
 
-        .emoji {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
+.subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+}
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
-        }
+.emoji {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.game-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+.game-title {
+    color: #667eea;
+    margin-bottom: 15px;
+}
 
-        .game-container {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            animation: fadeInUp 2s ease-out;
-        }
+#game {
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    background: #f7f7f7;
+}
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.instructions {
+    color: #666;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
 
-        .game-title {
-            color: #667eea;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-        }
-
-        #game {
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            background: #f7f7f7;
-        }
-
-        .instructions {
-            color: #666;
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-
-        .score {
-            color: #667eea;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-    </style>
+.score {
+    color: #667eea;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 5px;
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="emoji">🚧</div>
-        <h1>Site en Construction</h1>
-        <p class="subtitle">Nous travaillons dur pour vous offrir quelque chose d'incroyable !</p>
-        
-        <div class="game-container">
-            <div class="game-title">En attendant, amusez-vous avec le Dino ! 🦖</div>
-            <canvas id="game" width="600" height="150"></canvas>
-            <div class="instructions">Appuyez sur ESPACE ou cliquez pour sauter</div>
-            <div class="score">Score: <span id="score">0</span></div>
-        </div>
+
+<div class="container">
+    <div class="emoji">🚧</div>
+    <h1>Site en Construction</h1>
+    <p class="subtitle">Nous travaillons sur quelque chose de lourd 👀</p>
+
+    <div class="game-container">
+        <div class="game-title">Mini Jeu Dino 🦖</div>
+        <canvas id="game" width="600" height="150"></canvas>
+        <div class="instructions">Espace ou clic pour sauter</div>
+        <div class="score">Score: <span id="score">0</span></div>
+        <div class="score">High Score: <span id="highScore">0</span></div>
     </div>
+</div>
 
-    <script>
-        const canvas = document.getElementById('game');
-        const ctx = canvas.getContext('2d');
-        const scoreElement = document.getElementById('score');
+<script>
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const scoreElement = document.getElementById('score');
+const highScoreElement = document.getElementById('highScore');
 
-        let gameSpeed = 3;
-        let gravity = 0.6;
-        let score = 0;
-        let gameRunning = false;
-        let gameOver = false;
+let gameSpeed = 3;
+let gravity = 0.6;
+let score = 0;
+let gameStarted = false;
+let gameOver = false;
 
-        const dino = {
-            x: 50,
-            y: canvas.height - 50,
-            width: 40,
-            height: 43,
-            dy: 0,
-            jumpPower: -12,
-            grounded: false,
-            jumping: false
-        };
+let highScore = localStorage.getItem("highScore") || 0;
+highScoreElement.textContent = highScore;
 
-        const obstacles = [];
-        let frameCount = 0;
-        let obstacleFrequency = 150;
+const dino = {
+    x: 50,
+    y: canvas.height - 50,
+    width: 40,
+    height: 40,
+    dy: 0,
+    jumpPower: -12,
+    grounded: false
+};
 
-        function drawDino() {
-            ctx.fillStyle = '#535353';
-            // Corps
-            ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
-            // Oeil
-            ctx.fillStyle = 'white';
-            ctx.fillRect(dino.x + 25, dino.y + 5, 8, 8);
-            ctx.fillStyle = 'black';
-            ctx.fillRect(dino.x + 28, dino.y + 8, 3, 3);
-            // Pattes
-            ctx.fillStyle = '#535353';
-            ctx.fillRect(dino.x + 5, dino.y + dino.height, 5, 7);
-            ctx.fillRect(dino.x + 25, dino.y + dino.height, 5, 7);
-        }
+const obstacles = [];
+let frameCount = 0;
+let obstacleFrequency = 120;
 
-        function drawObstacle(obstacle) {
-            ctx.fillStyle = '#535353';
-            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-        }
+function drawDino() {
+    ctx.fillStyle = "#535353";
+    ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+}
 
-        function drawGround() {
-            ctx.strokeStyle = '#535353';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(0, canvas.height - 5);
-            ctx.lineTo(canvas.width, canvas.height - 5);
-            ctx.stroke();
-        }
+function drawGround() {
+    ctx.fillStyle = "#999";
+    ctx.fillRect(0, canvas.height - 5, canvas.width, 5);
+}
 
-        function jump() {
-            if (dino.grounded && !dino.jumping) {
-                dino.dy = dino.jumpPower;
-                dino.grounded = false;
-                dino.jumping = true;
-            }
-        }
+function jump() {
+    if (dino.grounded) {
+        dino.dy = dino.jumpPower;
+        dino.grounded = false;
+    }
+}
 
-        function updateDino() {
-            dino.dy += gravity;
-            dino.y += dino.dy;
+function updateDino() {
+    dino.dy += gravity;
+    dino.y += dino.dy;
 
-            if (dino.y + dino.height >= canvas.height - 5) {
-                dino.y = canvas.height - 5 - dino.height;
-                dino.dy = 0;
-                dino.grounded = true;
-                dino.jumping = false;
-            }
-        }
+    if (dino.y + dino.height >= canvas.height - 5) {
+        dino.y = canvas.height - 5 - dino.height;
+        dino.dy = 0;
+        dino.grounded = true;
+    }
+}
 
-        function createObstacle() {
-            const size = Math.random() > 0.5 ? 20 : 40;
-            obstacles.push({
-                x: canvas.width,
-                y: canvas.height - 5 - size,
-                width: 20,
-                height: size
-            });
-        }
+function createObstacle() {
+    obstacles.push({
+        x: canvas.width,
+        y: canvas.height - 25,
+        width: 20,
+        height: 20
+    });
+}
 
-        function updateObstacles() {
-            for (let i = obstacles.length - 1; i >= 0; i--) {
-                obstacles[i].x -= gameSpeed;
+function updateObstacles() {
+    obstacles.forEach(ob => ob.x -= gameSpeed);
 
-                if (obstacles[i].x + obstacles[i].width < 0) {
-                    obstacles.splice(i, 1);
-                    score++;
-                    scoreElement.textContent = score;
-                }
-            }
+    if (frameCount % obstacleFrequency === 0) {
+        createObstacle();
+    }
 
-            if (frameCount % obstacleFrequency === 0) {
-                createObstacle();
-            }
-
-            frameCount++;
-        }
-
-        function checkCollision() {
-            for (let obstacle of obstacles) {
-                if (
-                    dino.x < obstacle.x + obstacle.width &&
-                    dino.x + dino.width > obstacle.x &&
-                    dino.y < obstacle.y + obstacle.height &&
-                    dino.y + dino.height > obstacle.y
-                ) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        function resetGame() {
-            obstacles.length = 0;
-            score = 0;
-            frameCount = 0;
-            dino.y = canvas.height - 50;
-            dino.dy = 0;
-            gameOver = false;
+    obstacles.forEach((ob, i) => {
+        if (ob.x + ob.width < 0) {
+            obstacles.splice(i, 1);
+            score++;
             scoreElement.textContent = score;
+
+            if (score % 5 === 0) {
+                gameSpeed += 0.3; // difficulté augmente
+            }
         }
+    });
 
-        function gameLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    frameCount++;
+}
 
-            drawGround();
+function checkCollision() {
+    return obstacles.some(ob =>
+        dino.x < ob.x + ob.width &&
+        dino.x + dino.width > ob.x &&
+        dino.y < ob.y + ob.height &&
+        dino.y + dino.height > ob.y
+    );
+}
 
-            if (!gameOver) {
-                updateDino();
-                updateObstacles();
+function resetGame() {
+    obstacles.length = 0;
+    score = 0;
+    gameSpeed = 3;
+    frameCount = 0;
+    dino.y = canvas.height - 50;
+    scoreElement.textContent = score;
+    gameOver = false;
+}
 
-                if (checkCollision()) {
-                    gameOver = true;
-                    ctx.fillStyle = '#667eea';
-                    ctx.font = '30px Arial';
-                    ctx.fillText('GAME OVER!', canvas.width / 2 - 90, canvas.height / 2);
-                    ctx.font = '16px Arial';
-                    ctx.fillText('Cliquez pour recommencer', canvas.width / 2 - 100, canvas.height / 2 + 30);
-                }
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawGround();
+
+    if (!gameStarted) {
+        ctx.fillStyle = "#667eea";
+        ctx.font = "20px Arial";
+        ctx.fillText("Appuie sur Espace pour commencer", 150, 60);
+        requestAnimationFrame(gameLoop);
+        return;
+    }
+
+    if (!gameOver) {
+        updateDino();
+        updateObstacles();
+
+        if (checkCollision()) {
+            gameOver = true;
+
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem("highScore", highScore);
+                highScoreElement.textContent = highScore;
             }
-
-            drawDino();
-            obstacles.forEach(drawObstacle);
-
-            requestAnimationFrame(gameLoop);
         }
+    } else {
+        ctx.fillStyle = "#667eea";
+        ctx.font = "25px Arial";
+        ctx.fillText("GAME OVER", 220, 60);
+        ctx.font = "16px Arial";
+        ctx.fillText("Clique pour recommencer", 210, 85);
+    }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
-                e.preventDefault();
-                if (gameOver) {
-                    resetGame();
-                } else {
-                    jump();
-                }
-            }
-        });
+    drawDino();
+    obstacles.forEach(ob => {
+        ctx.fillStyle = "#535353";
+        ctx.fillRect(ob.x, ob.y, ob.width, ob.height);
+    });
 
-        canvas.addEventListener('click', () => {
-            if (gameOver) {
-                resetGame();
-            } else {
-                jump();
-            }
-        });
+    requestAnimationFrame(gameLoop);
+}
 
-        gameLoop();
-    </script>
+document.addEventListener("keydown", e => {
+    if (e.code === "Space") {
+        if (!gameStarted) {
+            gameStarted = true;
+        } else if (gameOver) {
+            resetGame();
+        } else {
+            jump();
+        }
+    }
+});
+
+canvas.addEventListener("click", () => {
+    if (!gameStarted) {
+        gameStarted = true;
+    } else if (gameOver) {
+        resetGame();
+    } else {
+        jump();
+    }
+});
+
+gameLoop();
+</script>
+
 </body>
 </html>
